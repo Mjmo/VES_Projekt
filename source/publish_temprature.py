@@ -1,16 +1,16 @@
 import time
 import ssl
 import paho.mqtt.client as mqtt
-
-HOST = "ef1abfcf530c4377bf54b19e6e58cfe7.s1.eu.hivemq.cloud"
-PORT = 8883
-USERNAME = "hamod"
-PASSWORD = "12345678Aa"
+import os
+from dotenv import load_dotenv
+load_dotenv()
 TOPIC = "temperature"
 SENSOR_PATH = "/sys/bus/w1/devices/28-0000092c511b/w1_slave"
-
 connected_flag = False
-
+HOST=os.getenv("HOST")
+PORT=os.getenv("PORT")
+USERNAME=os.getenv("USERNAME")
+PASSWORD=os.getenv("PASSWORD")
 def read_temperature():
     try:
         with open(SENSOR_PATH, 'r') as f:
